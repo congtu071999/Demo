@@ -2,13 +2,21 @@
 	include ('./users.php');
 	$obj_users = new users();
 
-	#$users = $obj_users->getUsers();
+	#$users = $obj_users->pick();
+	//xoa
+	$id = '';
+	if(isset($_GET['id'])){
+		$id = $_GET['id'];
+		$obj_users->deleteUser($id);
+	}
 
+	//tim kiem
 	$keyword = '';
 	if(isset($_GET['keyword'])){
 		$keyword = $_GET['keyword'];
 	}
 	$users = $obj_users->getUsers($keyword);
+
 ?>
 
 <!DOCTYPE html>
@@ -45,6 +53,9 @@
 	<div class="row">
 		<?php foreach ($users as $users) : ?>
 		<div class="col-md-4">
+			<a href='Source.php?id=<?php echo $users['id']; ?>'>Xóa</a>
+			<a href="themmoi.php?id=<?php echo $users['id'] ?>">Them moi</a>
+			<a href="capnhat.php?id=<?php echo $users['id'] ?>">cập nhật</a>
 			<img src="public/images/anh1.png" class="img-responsive">
 			<div class="name">
 				<h2><?php echo $users['username']; ?></h2>
